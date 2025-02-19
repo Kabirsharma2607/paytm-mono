@@ -23,7 +23,7 @@ export default function Layout({
           <SidebarItem
             href={"/p2p"}
             icon={<P2PTransferIcon />}
-            title="Peer to Peer"
+            title="Peer to person"
           />
         </div>
       </div>

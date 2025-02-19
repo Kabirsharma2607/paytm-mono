@@ -25,3 +25,14 @@ jobs:
           tags: kabirsharma2607/workflows_test:latest
       - name: Verified push image
         run: docker pull kabirsharma2607/workflows_test:latest
+      - name: Push to EC2
+        run: appleboy/ssh-action@main
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo docker pull kabirsharma2607/workflows_test:latest
+            sudo docker stop workflows_test || true
+            sudo docker rm workflows_test || true
+            sudo docker run -d -p 3005:3000 --name workflows_test kabirsharma2607/workflows_test:latest
